@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 01:48:19 by svydrina          #+#    #+#             */
-/*   Updated: 2024/08/10 15:43:32 by marvin           ###   ########.fr       */
+/*   Updated: 2024/08/10 16:51:22 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,20 @@ int main(void)
     {
         std::cerr << e.what() << '\n';
     }
+
+    Array<int> newIntArr(intArr);
+
+    std::cout << "Second member of the new array before we changed it: " << newIntArr[1] << std::endl;
+    newIntArr[1] = 42;
+    std::cout << "Second member of the new array after we changed it: " << newIntArr[1] << std::endl;
+    std::cout << "Second member of the old array : " << intArr[1] << std::endl;
+
+    Array<int> anotherIntArr = intArr;
+
+    std::cout << "Second member of the new array before we changed it: " << anotherIntArr[1] << std::endl;
+    anotherIntArr[1] = 42;
+    std::cout << "Second member of the new array after we changed it: " << anotherIntArr[1] << std::endl;
+    std::cout << "Second member of the old array : " << intArr[1] << std::endl;
 
     return (0);
 }
