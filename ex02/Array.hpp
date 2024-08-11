@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 01:48:32 by svydrina          #+#    #+#             */
-/*   Updated: 2024/08/10 15:39:29 by marvin           ###   ########.fr       */
+/*   Updated: 2024/08/11 15:26:15 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 #define RED "\033[31m"
 #define CYAN "\033[36m"
 #define MAGENTA "\033[35m"
+#define YELLOW "\033[33m"
 #define RESET "\033[0m"
 
 template<typename T>
@@ -25,9 +26,9 @@ private:
     T*  _arr;
     unsigned int _size;
 public:
-    Array(): _arr(new T()), _size(0) {};
-    Array(unsigned int u): _arr(new T[u]), _size(u) {};
-    Array(const Array& rhs): _arr(new T[rhs._size]), _size(rhs._size)
+    Array(): _arr(new T()), _size(0) {std::cout << YELLOW "empty constructor called" RESET << std::endl;};
+    Array(unsigned int u): _arr(new T[u]()), _size(u) {std::cout << YELLOW "constructor with size parameter called" RESET << std::endl;};
+    Array(const Array& rhs): _arr(new T[rhs._size]()), _size(rhs._size)
     {
         std::cout << CYAN "Copy constructor called" RESET<< std::endl;
         for (unsigned int i = 0; i < rhs._size; i++)
@@ -39,10 +40,10 @@ public:
         if (this != &rhs)
         {
             delete [] this->_arr;
-            this->arr = new T[rhs._size];
+            this->_arr = new T[rhs._size];
             this->_size = rhs._size;
             for (unsigned int i = 0; i < rhs._size; i++)
-                this->arr[i] = rhs._arr[i];
+                this->_arr[i] = rhs._arr[i];
         }
         return *this;
     }
@@ -64,5 +65,14 @@ public:
         return _arr[u];
     }
 };
+
+template<typename T>
+std::ostream& operator<<(std::ostream& out, const Array<T>& arr)
+{
+    std::cout << "printing array" << std::endl;
+    for (unsigned int i = 0; i < arr.size(); i++)
+        out << arr[i] << " ";
+    return out;
+}
 
 
